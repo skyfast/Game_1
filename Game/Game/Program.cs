@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Story;
+using System;
 
 namespace Game
 {
@@ -15,7 +16,8 @@ namespace Game
             //get the 'player' name
             Player curPlayer = new Player(Intro.GetName());
 
-            Console.WriteLine("Name {0}", curPlayer.Name);
+            Level curLevel = new Level(1);
+            curLevel.DisplayBoard(curPlayer);
             Console.ReadLine();
           
            

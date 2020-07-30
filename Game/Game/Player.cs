@@ -25,7 +25,7 @@ namespace Game
 
         public int Hp
         {
-            get { return Hp; }
+            get { return hp; }
             set { hp = value; }
         }
 
