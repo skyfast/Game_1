@@ -1,0 +1,13 @@
+Game loop
+
+Start in a doungen and have to get to the exit in each level. Have limmited hp and dp (dream points). 
+
+Chance to have to fight each move. Can try to rest to restore point with a 50/50 chance of failing and having to fight. 
+
+If die, start back at the beginging.
+
+fighting: 
+
+3 attacks, works like rock, papper, sic 
+
+3 def, works the same way
