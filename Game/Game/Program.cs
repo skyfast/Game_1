@@ -7,8 +7,7 @@ namespace Game
     {
         static void Main(string[] args)
         {
-           //place holder, will make a player class to hold this later
-            string pName = "";
+
             
             //display the intro
             Intro.DisplayIntro();
