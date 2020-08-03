@@ -16,7 +16,9 @@ namespace Game
             Player curPlayer = new Player(Intro.GetName());
 
             Level curLevel = new Level(1);
-            curLevel.DisplayBoard(curPlayer);
+            curLevel.playLevel(curPlayer);
+            
+            /*curLevel.DisplayBoard(curPlayer);
             
 
             char test;
@@ -27,7 +29,7 @@ namespace Game
                 Console.WriteLine("good!");
             else
                 Console.WriteLine("Bad!");
-            Console.ReadLine();
+            Console.ReadLine();*/
 
 
         }

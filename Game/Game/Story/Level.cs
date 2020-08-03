@@ -27,6 +27,11 @@ namespace Game.Story
         private int playerX;
         private int playerY;
 
+        //track if level is running
+        //playLevel set to true
+        //ExitMove will set to false 
+        private bool levelRunning;
+
 
         public int PlayerX
         {
@@ -38,6 +43,13 @@ namespace Game.Story
         {
             get { return playerY; }
             set { playerY = value;}
+        }
+
+        public bool LevelRunning
+        {
+            get { return levelRunning; }
+            set { levelRunning = value; }
+
         }
         public Level(int num)
         {
@@ -108,7 +120,34 @@ namespace Game.Story
         }
        
 
-        //Game play Methods 
+        //-------Game play Methods------
+
+        //game loop
+
+        public void playLevel(Player curPlayer)
+        {
+            LevelRunning = true;
+
+            while(LevelRunning && curPlayer.Hp > 0)
+            {
+                //display the board
+                DisplayBoard(curPlayer);
+
+                //wait for valid move loop
+                bool goodMove;
+                char move;
+                do
+                {
+                    move = PlayerBoardMove();
+                    goodMove = validateBoardMove(move);
+
+                } while (!goodMove);
+
+                //play out the players move
+                MakeBoardMove(move, curPlayer);
+            }
+            Console.WriteLine("end lvl");
+        }
         
         //get the players board move
         public char PlayerBoardMove()
@@ -155,6 +194,122 @@ namespace Game.Story
 
             return false;
         }
+
+
+        //Make the players move
+
+        public void MakeBoardMove(char input, Player curPlayer)
+        {
+            //track where the player is moving
+            int newX, newY;
+
+            if (input == 'w')
+            {
+                newX = playerX;
+                newY = playerY -1;
+
+                char target = board[newY, newX];
+
+                ResolveBoardMove(target, curPlayer);
+                MovePlayerBoardMarker(newX, newY);
+
+            }
+            else if (input == 's')
+            {
+                newX = playerX;
+                newY = playerY +1;
+
+                char target = board[newY, newX];
+
+                ResolveBoardMove(target, curPlayer);
+                MovePlayerBoardMarker(newX, newY);
+
+            }
+            else if (input == 'a')
+            {
+                newX = playerX -1;
+                newY = playerY;
+
+                char target = board[newY, newX];
+
+                ResolveBoardMove(target, curPlayer);
+                MovePlayerBoardMarker(newX, newY);
+
+            }
+            else if (input == 'd')
+            {
+                newX = playerX+1;
+                newY = playerY;
+
+                char target = board[newY, newX];
+
+                ResolveBoardMove(target, curPlayer);
+                MovePlayerBoardMarker(newX, newY);
+
+            }
+        }
+        
+        //resolve board move
+        public void ResolveBoardMove(char land, Player curPlayer)
+        {
+            if (land == EXIT)
+            {
+                ExitMove(curPlayer);
+            }
+            else if(land == ITEM)
+            {
+                ItemMove(curPlayer);
+            }
+            else if(land == EMPTY)
+            {
+                EmptyMove(curPlayer);
+            }
+        }
+
+        //switched the player and the spot they are moving too
+        public void MovePlayerBoardMarker(int newX, int newY)
+        {
+            board[PlayerY, PlayerX] = EMPTY;
+            board[newY, newX] = PLAYERSYM;
+
+            PlayerX = newX;
+            PlayerY = newY;
+        }
+        //--Tile Methods
+
+        public void ItemMove(Player curPlayer)
+        {
+            Console.Clear();
+            Console.WriteLine("You landed on a Item,  but no one came");
+            Console.WriteLine("More code is needed, sorry.");
+
+            Console.ReadLine();
+        }
+
+        public void ExitMove(Player curPlayer)
+        {
+            Console.Clear();
+            
+            Console.WriteLine("You found the exit and are filled with");
+            Console.WriteLine("Determination");
+            Console.WriteLine("More code is needed, sorry");
+
+            //end the level when player gets to the end
+            LevelRunning = false;
+
+            Console.ReadLine();
+        }
+
+        public void EmptyMove(Player curPlayer)
+        {
+            Console.Clear();
+
+            Console.WriteLine("You got in a fight, but no one came");
+            Console.WriteLine("More code is needed, sorry");
+
+            Console.ReadLine();
+        }
+
     }
 
 }
