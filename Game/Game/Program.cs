@@ -17,9 +17,19 @@ namespace Game
 
             Level curLevel = new Level(1);
             curLevel.DisplayBoard(curPlayer);
+            
+
+            char test;
+
+            test = curLevel.PlayerBoardMove();
+            Console.WriteLine(test);
+            if (curLevel.validateBoardMove(test))
+                Console.WriteLine("good!");
+            else
+                Console.WriteLine("Bad!");
             Console.ReadLine();
-          
-           
+
+
         }
     }
 }

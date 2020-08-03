@@ -17,19 +17,41 @@ namespace Game.Story
         //random gen
         Random gen = new Random();
 
+        //board vars
         private const int WIDTH = 10;
         private int length;
         private Char[,] board;
         private int levelNum;
 
+        //player position
+        private int playerX;
+        private int playerY;
+
+
+        public int PlayerX
+        {
+            get { return playerX; }
+            set { playerX = value; }
+        }
+
+        public int PlayerY
+        {
+            get { return playerY; }
+            set { playerY = value;}
+        }
         public Level(int num)
         {
             levelNum = num;
             length = 10 + ((num - 1) * 5); // caclulate the langht based on the lvl num
             board = new char[length, WIDTH];
             FillBoard();
+            playerX = 0;
+            playerY = length - 1;
 
         }
+
+
+        //Board methods
 
         //fills the board
         public void FillBoard()
@@ -67,7 +89,8 @@ namespace Game.Story
             }
 
         }
-
+        
+        //Displays the board 
         public void DisplayBoard(Player curPlayer)
         {
             Console.Clear();
@@ -80,7 +103,58 @@ namespace Game.Story
                 }
                 Console.Write("| \n");
             }
-            Console.WriteLine("|-| Name: {0} || HP: {1} || DP: {2} |-|", curPlayer.Name, curPlayer.Hp, curPlayer.Dp);
+            //dispplay the player stats
+            Console.WriteLine("|-| Name: {0} || HP: {1}/{2} || DP: {3}/{4} |-|", curPlayer.Name, curPlayer.Hp, curPlayer.MaxHp, curPlayer.Dp, curPlayer.MaxDp);
+        }
+       
+
+        //Game play Methods 
+        
+        //get the players board move
+        public char PlayerBoardMove()
+        {
+            ConsoleKeyInfo playerKey;
+            bool validMove = false;
+
+            do
+            {
+
+                playerKey = Console.ReadKey();
+
+                if (playerKey.KeyChar == 'w' || playerKey.KeyChar == 's' || playerKey.KeyChar == 'a' || playerKey.KeyChar == 'd')
+                    validMove = true;
+
+            } while (!validMove);
+
+            return playerKey.KeyChar;
+        }
+
+        // validates player move
+        public bool validateBoardMove(char input)
+        {
+            if(input == 'w')
+            {
+                if (playerY != 0)
+                    return true;
+            }
+            else if(input == 's')
+            {
+                if (playerY != length - 1)
+                    return true;
+            }
+            else if(input == 'a')
+            {
+                if (playerX != 0)
+                    return true;
+            }
+            else if(input == 'd')
+            {
+                if (playerX != WIDTH - 1)
+                    return true;
+            }
+
+            return false;
         }
     }
+
 }
