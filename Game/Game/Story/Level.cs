@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
+﻿using Game.Objects;
+using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -279,11 +280,7 @@ namespace Game.Story
 
         public void ItemMove(Player curPlayer)
         {
-            Console.Clear();
-            Console.WriteLine("You landed on a Item,  but no one came");
-            Console.WriteLine("More code is needed, sorry.");
-
-            Console.ReadLine();
+            Items.GetItem(curPlayer);
         }
 
         public void ExitMove(Player curPlayer)
