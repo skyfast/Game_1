@@ -299,14 +299,45 @@ namespace Game.Story
 
         public void EmptyMove(Player curPlayer)
         {
-            Console.Clear();
+            int randomChance = gen.Next(1, 11);
 
-            Console.WriteLine("You got in a fight, but no one came");
-            Console.WriteLine("More code is needed, sorry");
+            if(randomChance <= 7)
+            {
+                return;
+            }
+            else
+            {
+                Enemy mob = MakeMob();
 
-            Console.ReadLine();
+                mob.FightSetUp(curPlayer);
+            }
         }
 
+        //enemy functions
+        //--------------TODO-------------
+        //exspand the enemys and make more per lvl
+        public Enemy MakeMob()
+        {
+            int typeGen = gen.Next(1, 4);
+            int hpGen = gen.Next(5, 10);
+
+            if(typeGen == 1)
+            {
+                Enemy mob = new Enemy("Alligator", 'a', hpGen);
+                return mob;
+            }
+            else if(typeGen == 2)
+            {
+                Enemy mob = new Enemy("Doggo", 'd', hpGen);
+                return mob;
+            }
+            else
+            {
+                Enemy mob = new Enemy("Salamander", 's', hpGen);
+                return mob;
+            }
+
+        }
     }
 
 }

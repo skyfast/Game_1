@@ -9,7 +9,7 @@ namespace Game.Objects
 {
     //is the enemy the player will have to fight
     //will also have the fight in this class
-    class Enemy
+    public class Enemy
     {
         private string name;
         private char type;
@@ -177,7 +177,8 @@ namespace Game.Objects
             else if(playerAttack =='d')
             {
                 SpecialAttackD(curPlayer);
-            }    
+            }
+            Console.ReadLine();
         }
 
         //---Special attacks---
@@ -312,10 +313,12 @@ namespace Game.Objects
         {
             int damage = gen.Next(1, 5);
             curPlayer.Hp -= damage;
-
+            Console.Clear();
             Console.WriteLine("{0} hits {1}, about {2} damage hard.", this.Name, 
                 curPlayer.Name,damage.ToString());
             Console.WriteLine("-{0}hp!", damage.ToString());
+
+            Console.ReadLine();
         }
         //----helper methods-----
         public void FightHUD(Player curPlayer)
@@ -343,8 +346,8 @@ namespace Game.Objects
             do
             {
                 key = Console.ReadKey();
-            } while (key.KeyChar != 'q' || key.KeyChar != 'w' || key.KeyChar != 'a'
-            || key.KeyChar != 's' || key.KeyChar != 'd' || key.KeyChar != 'f');
+            } while (key.KeyChar != 'q' && key.KeyChar != 'w' && key.KeyChar != 'a'
+            && key.KeyChar != 's' && key.KeyChar != 'd' && key.KeyChar != 'f');
 
             return key.KeyChar;
         }
