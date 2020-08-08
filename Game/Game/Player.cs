@@ -12,6 +12,9 @@ namespace Game
         private int maxHp;
         private int maxDp;
 
+        //tracks charge up in fight
+        private bool charge;
+
         public Player (string pName)
         {
             name = pName;
@@ -19,6 +22,7 @@ namespace Game
             dp = 20;
             maxDp = 20;
             maxHp = 20;
+            charge = false;
         }
 
         public string Name
@@ -50,5 +54,12 @@ namespace Game
             get { return maxDp; }
             set { maxDp = value; }
         }
+
+        public bool Charge
+        {
+            get { return charge; }
+            set { charge = value; }
+        }
+
     }
 }
