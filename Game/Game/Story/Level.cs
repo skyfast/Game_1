@@ -278,11 +278,13 @@ namespace Game.Story
         }
         //--Tile Methods
 
+        //hendles when player gets to a item 
         public void ItemMove(Player curPlayer)
         {
             Items.GetItem(curPlayer);
         }
 
+        //handels whe the player makes it to the end 
         public void ExitMove(Player curPlayer)
         {
             Console.Clear();
@@ -297,6 +299,8 @@ namespace Game.Story
             Console.ReadLine();
         }
 
+        //handels player moves on empty spaces
+        //has chace to spawn a fight
         public void EmptyMove(Player curPlayer)
         {
             int randomChance = gen.Next(1, 11);
@@ -310,6 +314,7 @@ namespace Game.Story
                 Enemy mob = MakeMob();
 
                 mob.FightSetUp(curPlayer);
+
             }
         }
 

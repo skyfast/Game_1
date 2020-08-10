@@ -61,5 +61,19 @@ namespace Game
             set { charge = value; }
         }
 
+        //this method will make sure status are 
+        public void CorrectStats()
+        {
+            if(this.Hp > this.maxHp)
+            {
+                this.Hp = this.maxHp;
+            }
+
+            if(this.Dp > this.maxDp)
+            {
+                this.Dp = this.MaxDp;
+            }
+        }
+
     }
 }

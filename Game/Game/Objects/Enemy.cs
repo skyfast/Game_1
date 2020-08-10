@@ -61,7 +61,7 @@ namespace Game.Objects
             //used for the players intput
             char playerKey;
 
-            while(fighting)
+            while (fighting)
             {
                 //print out hud
                 FightHUD(curPlayer);
@@ -70,17 +70,45 @@ namespace Game.Objects
                 MakePlayerFightMove(ref fighting, playerKey, curPlayer);
 
                 //if the enemy is not at 0 or leess hp, it attacks
-                if(fighting && this.Hp > 0)
+                if (fighting && this.Hp > 0)
                 {
                     EnemyAttack(curPlayer);
                 }
 
                 //end fight if someone is at 0 hp
-                if(this.Hp <=0 || curPlayer.Hp <=0)
+                if (this.Hp <= 0 || curPlayer.Hp <= 0)
                 {
                     fighting = false;
                 }
             }
+
+            ResolveFight(curPlayer);
+            curPlayer.Charge = false;
+        }
+
+        //handles the end of the fight
+
+        public void ResolveFight(Player curPlayer)
+        {
+            if(curPlayer.Hp <= 0)
+            {
+                Console.Clear();
+                Console.WriteLine("{0} has passed away...", curPlayer.Name);
+                Console.ReadLine();
+            }
+            else if(this.Hp <= 0)
+            {
+                Console.Clear();
+                curPlayer.Hp += 2;
+                curPlayer.Dp += 2;
+
+                curPlayer.CorrectStats();
+
+                Console.WriteLine("{0} was defeted. +2hp and +2dp!", this.Name);
+                Console.ReadLine();
+
+            }
+           
         }
 
         //resolves the players move
@@ -135,7 +163,7 @@ namespace Game.Objects
         public void RunPlayerAttack(ref bool fighting, Player curPlayer)
         {
             int chance = gen.Next(1, 5);
-            if (chance > 4)
+            if (chance < 4)
             {
                 Console.Clear();
                 Console.WriteLine("{0} tried to run but failed...", curPlayer.Name);
@@ -178,6 +206,7 @@ namespace Game.Objects
             {
                 SpecialAttackD(curPlayer);
             }
+            curPlayer.Charge = false;
             Console.ReadLine();
         }
 
